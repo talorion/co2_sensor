@@ -19,7 +19,7 @@ This is also a preperation to be used with Nephele.
 # credits
 
 based on code by [henryk ploetz](https://hackaday.io/project/5301-reverse-engineering-a-low-cost-usb-co-monitor/log/17909-all-your-base-are-belong-to-us)
-based on code [office_weather](https://github.com/wooga/office_weather) by [wooga](http://www.wooga.com)
+and on code [office_weather](https://github.com/wooga/office_weather) by [wooga](http://www.wooga.com)
 
 # license
 

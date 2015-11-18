@@ -1,0 +1,63 @@
+#include "sensor_gui.h"
+
+#include "qcustomplot.hpp"
+
+sensor_gui::sensor_gui(QWidget *par):
+    QMainWindow(par),
+    plot(NULL),
+    temp_graph(NULL),
+    co2_graph(NULL),
+    rh_graph(NULL)
+{
+    plot = new QCustomPlot();
+
+    plot->yAxis->setAutoTickCount(2);
+    plot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+    plot->xAxis->setAutoTickCount(2);
+    plot->xAxis->setDateTimeFormat("hh:mm:ss");
+    plot->xAxis->setRangeLower(QDateTime::currentMSecsSinceEpoch()/1000.0);
+
+    setCentralWidget(plot);
+
+    temp_graph = plot->addGraph();
+    co2_graph  = plot->addGraph();
+    rh_graph   = plot->addGraph();
+
+}
+
+sensor_gui::~sensor_gui()
+{
+
+}
+
+void sensor_gui::print_temperature(double temp)
+{
+    //Q_UNUSED(temp);
+    updatePlot(temp_graph, temp);
+}
+
+void sensor_gui::print_carbon_dioxide(double co2)
+{
+    //Q_UNUSED(co2);
+    updatePlot(co2_graph, co2);
+}
+
+void sensor_gui::print_relative_humidity(double rh)
+{
+    //Q_UNUSED(rh);
+    updatePlot(rh_graph, rh);
+}
+
+void sensor_gui::updatePlot(QCPGraph* grap, double value)
+{
+    double graph_persistance_time = 60;
+
+    //QDateTime* t = new QDateTime();
+    QDateTime t;
+    double time = t.currentMSecsSinceEpoch()/1000.0;
+    grap->addData(time, value);
+    plot->xAxis->setRangeUpper(time);
+    plot->xAxis->setRangeLower(time - graph_persistance_time);
+    grap->removeDataBefore(time - graph_persistance_time);
+    plot->replot();
+}

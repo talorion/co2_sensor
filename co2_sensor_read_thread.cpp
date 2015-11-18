@@ -2,8 +2,8 @@
 
 #include "qt_co2_sensor.h"
 
-co2_sensor_read_thread::co2_sensor_read_thread(QObject *parent) :
-    QThread(parent),
+co2_sensor_read_thread::co2_sensor_read_thread(QObject *par) :
+    QThread(par),
     mutex(),
     abort(false),
     condition()

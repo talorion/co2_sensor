@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-sensor_output::sensor_output(QObject *parent) : QObject(parent)
+sensor_output::sensor_output(QObject *par) : QObject(par)
 {
 
 }

@@ -8,8 +8,9 @@ class sensor_output : public QObject
 {
     Q_OBJECT
 public:
-    explicit sensor_output(QObject *parent = 0);
+    explicit sensor_output(QObject *par = 0);
     ~sensor_output();
+    Q_DISABLE_COPY(sensor_output)
 
 public slots:
     void print_temperature(double temp);

@@ -9,8 +9,9 @@ class co2_sensor_read_thread : public QThread
 {
     Q_OBJECT
 public:
-    explicit co2_sensor_read_thread(QObject *parent = 0);
+    explicit co2_sensor_read_thread(QObject *par = 0);
     ~co2_sensor_read_thread();
+    Q_DISABLE_COPY(co2_sensor_read_thread)
 
 signals:
     void temperature_changed(double);

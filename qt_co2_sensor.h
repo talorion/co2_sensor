@@ -10,8 +10,9 @@ class qt_co2_sensor : public QObject
 {
     Q_OBJECT
 public:
-    explicit qt_co2_sensor(QObject *parent = 0);
+    explicit qt_co2_sensor(QObject *par = 0);
     ~qt_co2_sensor();
+    Q_DISABLE_COPY(qt_co2_sensor)
 
     void read();
 

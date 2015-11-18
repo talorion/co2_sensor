@@ -10,8 +10,8 @@
 #include <stdlib.h>
 #include <libusb.h>
 
-qt_co2_sensor::qt_co2_sensor(QObject *parent) :
-    QObject(parent),
+qt_co2_sensor::qt_co2_sensor(QObject *par) :
+    QObject(par),
     endpoint_in(0),
     endpoint_out(0),
     devh(NULL),
@@ -204,8 +204,9 @@ void qt_co2_sensor::set_temperature(quint16 val)
     double newval = val/16.0-273.15;;
     if(temperature != newval){
         temperature =newval;
-        emit temperature_changed(temperature);
+        //emit temperature_changed(temperature);
     }
+    emit temperature_changed(temperature);
 }
 
 void qt_co2_sensor::set_carbon_dioxide(quint16 val)
@@ -213,8 +214,9 @@ void qt_co2_sensor::set_carbon_dioxide(quint16 val)
     double newval = val;
     if(carbon_dioxide != newval){
         carbon_dioxide =newval;
-        emit carbon_dioxide_changed(carbon_dioxide);
+        //emit carbon_dioxide_changed(carbon_dioxide);
     }
+    emit carbon_dioxide_changed(carbon_dioxide);
 }
 
 void qt_co2_sensor::set_relative_humidity(quint16 val)
@@ -222,8 +224,9 @@ void qt_co2_sensor::set_relative_humidity(quint16 val)
     double newval = val/100.0;
     if(relative_humidity != newval){
         relative_humidity =newval;
-        emit relative_humidity_changed(relative_humidity);
+        //emit relative_humidity_changed(relative_humidity);
     }
+    emit relative_humidity_changed(relative_humidity);
 }
 double qt_co2_sensor::get_relative_humidity() const
 {

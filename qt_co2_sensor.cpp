@@ -2,13 +2,14 @@
 
 #include <QDebug>
 
-#include "libusb.h"
+
+
 #include <errno.h>
 #include <signal.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <libusb.h>
+#include <libusb-1.0/libusb.h>
 
 qt_co2_sensor::qt_co2_sensor(QObject *par) :
     QObject(par),

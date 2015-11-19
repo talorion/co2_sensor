@@ -13,20 +13,23 @@ sensor_gui::sensor_gui(QWidget *par):
 {
     temp_plot = new QCustomPlot();
     setupPlot(temp_plot);
-    temp_plot->yAxis->setRangeLower(0);
-    temp_plot->yAxis->setRangeUpper(50);
+    temp_plot->yAxis->setRangeLower(15);
+    temp_plot->yAxis->setRangeUpper(35);
     temp_plot->legend->setVisible(true);
 
     temp_graph = temp_plot->addGraph();
+    temp_graph->setAdaptiveSampling(true);
+    temp_graph->setPen(QPen(QColor(255,0,0)));
     temp_graph->setName("temperature [°C]");
 //==========
     co2_plot = new QCustomPlot();
     setupPlot(co2_plot);
-    co2_plot->yAxis->setRangeLower(0);
+    co2_plot->yAxis->setRangeLower(400);
     co2_plot->yAxis->setRangeUpper(1200);
     co2_plot->legend->setVisible(true);
 
     co2_graph = co2_plot->addGraph();
+    co2_graph->setPen(QPen(QColor(0,255,0)));
     co2_graph->setName("CO2 [ppm]");
 //==========
     rh_plot = new QCustomPlot();
@@ -36,6 +39,8 @@ sensor_gui::sensor_gui(QWidget *par):
     rh_plot->legend->setVisible(true);
 
     rh_graph = rh_plot->addGraph();
+    rh_graph->setAdaptiveSampling(true);
+    rh_graph->setPen(QPen(QColor(0,0,255)));
     rh_graph->setName("RH [%]");
 //==========
 
@@ -65,7 +70,7 @@ void sensor_gui::setupPlot(QCustomPlot *plt)
     plt->xAxis->setAutoTickCount(2);
     plt->xAxis->setDateTimeFormat("hh:mm:ss");
     plt->xAxis->setRangeLower(QDateTime::currentMSecsSinceEpoch()/1000.0);
-
+    plt->xAxis->setLabel(tr("Time"));
     plt->xAxis->setRangeLower(time - 60);
 }
 

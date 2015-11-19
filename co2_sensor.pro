@@ -9,7 +9,7 @@ QT       += core gui script printsupport network scripttools
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = co2_sensor
-CONFIG   += console
+#CONFIG   += console
 CONFIG   -= app_bundle
 
 TEMPLATE = app

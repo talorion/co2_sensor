@@ -170,7 +170,7 @@ void qt_co2_sensor::decrypt(unsigned char *buf, unsigned char *read_data)
 
     int sum=out[0]+out[1]+out[2];
     if (out[4] != 0x0d || (((sum) & 0xff) != out[3])){
-        qDebug()<<"Checksum error";
+        //qDebug()<<"Checksum error";
     }
     unsigned char  op  = out[0];
     uint16_t       val = out[1] << 8 | out[2];

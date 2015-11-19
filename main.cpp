@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
 
     co2_sensor_read_thread thrd;
 
-    sensor_output outp;
-    QObject::connect(&thrd,SIGNAL(temperature_changed(double)), &outp,SLOT(print_temperature(double)));
-    QObject::connect(&thrd,SIGNAL(carbon_dioxide_changed(double)), &outp,SLOT(print_carbon_dioxide(double)));
-    QObject::connect(&thrd,SIGNAL(relative_humidity_changed(double)), &outp,SLOT(print_relative_humidity(double)));
+    //sensor_output outp;
+    //QObject::connect(&thrd,SIGNAL(temperature_changed(double)), &outp,SLOT(print_temperature(double)));
+    //QObject::connect(&thrd,SIGNAL(carbon_dioxide_changed(double)), &outp,SLOT(print_carbon_dioxide(double)));
+    //QObject::connect(&thrd,SIGNAL(relative_humidity_changed(double)), &outp,SLOT(print_relative_humidity(double)));
 
     sensor_gui gui;
     QObject::connect(&thrd,SIGNAL(temperature_changed(double)), &gui,SLOT(print_temperature(double)));

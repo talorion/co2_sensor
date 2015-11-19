@@ -15,39 +15,51 @@ sensor_gui::sensor_gui(QWidget *par):
     setupPlot(temp_plot);
     temp_plot->yAxis->setRangeLower(15);
     temp_plot->yAxis->setRangeUpper(35);
+    temp_plot->yAxis->setLabel(tr("temperature [°C]"));
     temp_plot->legend->setVisible(true);
 
     temp_graph = temp_plot->addGraph();
     temp_graph->setAdaptiveSampling(true);
     temp_graph->setPen(QPen(QColor(255,0,0)));
     temp_graph->setName("temperature [°C]");
-//==========
-    co2_plot = new QCustomPlot();
-    setupPlot(co2_plot);
-    co2_plot->yAxis->setRangeLower(400);
-    co2_plot->yAxis->setRangeUpper(1200);
-    co2_plot->legend->setVisible(true);
+    //==========
 
-    co2_graph = co2_plot->addGraph();
+    temp_plot->yAxis2->setVisible(true);
+    temp_plot->yAxis2->setRangeLower(400);
+    temp_plot->yAxis2->setRangeUpper(1200);
+    temp_plot->yAxis2->setLabel(tr("CO2 [ppm]"));
+
+    co2_graph = temp_plot->addGraph(temp_plot->xAxis, temp_plot->yAxis2);
     co2_graph->setPen(QPen(QColor(0,255,0)));
     co2_graph->setName("CO2 [ppm]");
-//==========
-    rh_plot = new QCustomPlot();
-    setupPlot(rh_plot);
-    rh_plot->yAxis->setRangeLower(0);
-    rh_plot->yAxis->setRangeUpper(100);
-    rh_plot->legend->setVisible(true);
 
-    rh_graph = rh_plot->addGraph();
-    rh_graph->setAdaptiveSampling(true);
-    rh_graph->setPen(QPen(QColor(0,0,255)));
-    rh_graph->setName("RH [%]");
-//==========
+
+    //    co2_plot = new QCustomPlot();
+    //    setupPlot(co2_plot);
+    //    co2_plot->yAxis->setRangeLower(400);
+    //    co2_plot->yAxis->setRangeUpper(1200);
+    //    co2_plot->legend->setVisible(true);
+
+    //    co2_graph = co2_plot->addGraph();
+    //    co2_graph->setPen(QPen(QColor(0,255,0)));
+    //    co2_graph->setName("CO2 [ppm]");
+    //==========
+    //    rh_plot = new QCustomPlot();
+    //    setupPlot(rh_plot);
+    //    rh_plot->yAxis->setRangeLower(0);
+    //    rh_plot->yAxis->setRangeUpper(100);
+    //    rh_plot->legend->setVisible(true);
+
+    //    rh_graph = rh_plot->addGraph();
+    //    rh_graph->setAdaptiveSampling(true);
+    //    rh_graph->setPen(QPen(QColor(0,0,255)));
+    //    rh_graph->setName("RH [%]");
+    //==========
 
     QWidget* plot_widget = new QWidget();
     QVBoxLayout *plot_widget_layout = new QVBoxLayout();
     plot_widget_layout->addWidget(temp_plot);
-    plot_widget_layout->addWidget(co2_plot);
+    //plot_widget_layout->addWidget(co2_plot);
     //layout->addWidget(rh_plot);
     plot_widget->setLayout(plot_widget_layout);
 
@@ -72,6 +84,8 @@ void sensor_gui::setupPlot(QCustomPlot *plt)
     plt->xAxis->setRangeLower(QDateTime::currentMSecsSinceEpoch()/1000.0);
     plt->xAxis->setLabel(tr("Time"));
     plt->xAxis->setRangeLower(time - 60);
+
+
 }
 
 void sensor_gui::print_temperature(double temp)
@@ -85,7 +99,8 @@ void sensor_gui::print_carbon_dioxide(double co2)
 {
     //Q_UNUSED(co2);
     //CO2 [ppm]
-    updatePlot(co2_plot, co2_graph, co2, "CO2", "ppm");
+    //updatePlot(co2_plot, co2_graph, co2, "CO2", "ppm");
+    updatePlot(temp_plot, co2_graph, co2, "CO2", "ppm");
 }
 
 void sensor_gui::print_relative_humidity(double rh)
@@ -106,7 +121,7 @@ void sensor_gui::updatePlot(QCustomPlot *plt, QCPGraph* grap, double value, QStr
     grap->addData(time, value);
     //plt->xAxis->setRangeUpper(time);
     plt->xAxis->setRangeUpper(time + 60);
-    //plt->xAxis->setRangeLower(time - graph_persistance_time);
+    //plt->xAxis->setRangeLower(time - 60);
     //grap->removeDataBefore(time - graph_persistance_time);
     plt->replot();
 }
